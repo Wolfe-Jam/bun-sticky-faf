@@ -1,81 +1,96 @@
-# Bun Sticky
+# bun-sticky
 
-Fastest bun under the sum. Bun-native .faf CLI.
+Fastest bun under the sum. Bun-native .faf CLI with Wolfejam slot-based scoring.
 
-## Quick Start
+## Quick Commands
+
 ```bash
-bunx bun-sticky score    # Score current project
-bunx bun-sticky init app # Create project.faf
-bunx bun-sticky help     # Show commands
+bun test                    # Run WJTTC test suite (200+ tests)
+bun run index.ts score      # Score current project
+bun run index.ts help       # Show commands
+bun publish                 # Publish to npm (see PUBLISH-PROTOCOL.md)
 ```
 
 ## Architecture
+
 ```
 bun-sticky/
-├── index.ts           # CLI + ASCII banner
+├── index.ts              # CLI entry + ASCII banner
 ├── lib/
-│   ├── parser.ts      # Zero-dep YAML parser
-│   ├── scorer.ts      # Wolfejam slot-based scoring
-│   └── tier.ts        # 9-tier system
-├── tests/
-│   └── sticky.test.ts # 177 tests, WJTTC championship
-└── package.json       # Zero dependencies
+│   ├── parser.ts         # Zero-dep YAML parser
+│   ├── scorer.ts         # Wolfejam 21-slot scoring
+│   └── tier.ts           # 7-tier ranking system
+└── tests/
+    ├── sticky.test.ts    # Core unit tests
+    └── wjttc.test.ts     # Championship test suite
 ```
 
-## Core Concepts
+## Scoring System
 
-**Wolfejam Slot-Based Scoring** (NOT Elon weights)
+**Wolfejam Slot-Based Scoring** (NOT Elon weights):
+
 - 21 total slots across 5 categories
-- Type-aware: CLI=9 slots, Fullstack=21 slots
-- Score = Filled Slots / Applicable Slots × 100
+- Type-aware: CLI=9, Fullstack=21, etc.
+- Formula: `Score = (Filled / Applicable) × 100`
 
-**Tier System**
+| Category | Slots | Fields |
+|----------|-------|--------|
+| Project | 3 | name, goal, main_language |
+| Frontend | 4 | frontend, css_framework, ui_library, state_management |
+| Backend | 5 | backend, api_type, runtime, database, connection |
+| Universal | 3 | hosting, build, cicd |
+| Human | 6 | who, what, why, where, when, how |
+
+## Tier System
+
 | Score | Tier | Emoji |
 |-------|------|-------|
-| 100%  | Trophy | 🏆 |
-| 99%+  | Gold   | 🥇 |
-| 95%+  | Silver | 🥈 |
-| 85%+  | Bronze | 🥉 |
-| 70%+  | Green  | 🟢 |
-| 55%+  | Yellow | 🟡 |
-| <55%  | Red    | 🔴 |
+| 100% | Trophy | 🏆 |
+| 99%+ | Gold | 🥇 |
+| 95%+ | Silver | 🥈 |
+| 85%+ | Bronze | 🥉 |
+| 70%+ | Green | 🟢 |
+| 55%+ | Yellow | 🟡 |
+| <55% | Red | 🔴 |
 
 ## Key Files
-| File | Line | What |
-|------|------|------|
-| `lib/scorer.ts` | 16 | SLOTS definition (21 slots) |
-| `lib/scorer.ts` | 68 | TYPE_CATEGORIES mapping |
-| `lib/scorer.ts` | 173 | calculateScore() |
-| `lib/tier.ts` | 22 | getTier() |
-| `lib/parser.ts` | 1 | parseYaml() zero-dep |
 
-## Design Principles
-1. **Zero Dependencies** - Pure Bun APIs
-2. **TypeScript Native** - No build step
-3. **Speed First** - Sub-50ms cold start
-4. **WJTTC Testing** - Championship-grade test suite
-
-## Commands
-| Command | Description |
-|---------|-------------|
-| `score` | Show FAF score + tier |
-| `init <name>` | Create project.faf |
-| `sync` | Sync project.faf → CLAUDE.md |
-| `version` | Show version |
-| `help` | Show help |
+| File | Purpose |
+|------|---------|
+| `lib/scorer.ts:16` | SLOTS definition (21 slots) |
+| `lib/scorer.ts:68` | TYPE_CATEGORIES mapping |
+| `lib/scorer.ts:173` | calculateScore() function |
+| `lib/tier.ts:22` | getTier() function |
+| `lib/parser.ts:1` | parseYaml() zero-dep parser |
 
 ## Testing
+
+Championship-grade WJTTC test suite with full Bun test API coverage:
+
+- `test.each` - Parametrized tests
+- `test.concurrent` - Parallel execution
+- `mock`, `spyOn` - Mocking
+- Lifecycle hooks - beforeAll, afterEach, etc.
+- Full matcher suite
+
 ```bash
-bun test
-# 177 tests, 1254 assertions
-# Full Bun API: test.each, mock, spyOn, snapshots
-# WJTTC Championship Grade
+bun test --coverage        # With coverage
+bun test --watch           # Watch mode
+CLAUDECODE=1 bun test      # AI-friendly output
 ```
 
-## Part of FAF Ecosystem
-- **faf-cli** - Full Node.js CLI (15,000+ downloads)
-- **bun-sticky** - Bun-native lite CLI (you are here)
-- **xai-faf-zig** - Ultra-fast Zig implementation
+## Development Rules
+
+1. **Zero Dependencies** - Only Bun native APIs
+2. **No npm repeats** - Follow PUBLISH-PROTOCOL.md exactly
+3. **Tests first** - All changes need tests
+4. **Wolfejam slots only** - Never use Elon weights
+
+## Publishing
+
+**NEVER publish without explicit GO! approval.**
+
+See `PUBLISH-PROTOCOL.md` for the complete ceremony.
 
 ---
-*Zero dependencies. Pure Bun. Wolfejam slot-based scoring.*
+*Part of FAF ecosystem. Built for Claude Code.*

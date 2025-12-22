@@ -22,17 +22,7 @@ import { getTier } from "./lib/tier.ts";
 
 const VERSION = "1.0.1";
 
-// Bun Brand Colors (ANSI 256)
-const BUN_BLUE = "\x1b[38;5;39m";    // #00a6e1
-const BUN_PINK = "\x1b[38;5;205m";   // #ec4899
-const BUN_ORANGE = "\x1b[38;5;215m"; // #f89b4b (medium - croissant)
-const BUN_ORANGE_DARK = "\x1b[38;5;208m";  // dark orange (BUN)
-const BUN_YELLOW = "\x1b[38;5;220m"; // #febc2e
-const BUN_CREAM = "\x1b[38;5;223m";  // Croissant color
-const WHITE = "\x1b[97m";            // bright white (STICKY)
-
-// Standard colors
-const CYAN = "\x1b[36m";
+// Standard colors only (B/W version - color reserved for ZIG poster child)
 const GREEN = "\x1b[32m";
 const YELLOW = "\x1b[33m";
 const RED = "\x1b[31m";
@@ -45,21 +35,21 @@ const RESET = "\x1b[0m";
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const BANNER = `
-${BUN_BLUE}────────────────────────────────────────────────${RESET}
+────────────────────────────────────────────────
 
-   ${BUN_ORANGE}▄▄${RESET}       ${WHITE}▄▀▀▀ ▀█▀ █ ▄▀▀ █▄▀ █ █${RESET}
-  ${BUN_ORANGE}████${RESET}      ${WHITE}▀▀█▄  █  █ █   █▀▄  █${RESET}
-${BUN_ORANGE}██████${RESET}      ${WHITE}▄▄▄▀  █  █ ▀▀▀ █ █  █${RESET}
-${BUN_ORANGE}████████${RESET}
-${BUN_ORANGE}████████${RESET}    ${BUN_ORANGE_DARK}█▀▄  █ █ █▀▄${RESET}
- ${BUN_ORANGE}██████${RESET}     ${BUN_ORANGE_DARK}██▀  █ █ █ █${RESET}
-   ${BUN_ORANGE}████${RESET}     ${BUN_ORANGE_DARK}█▄▀  ▀▄▀ █ █${RESET}
-     ${BUN_ORANGE}▀▀${RESET}
+   ▄▄       ▄▀▀▀ ▀█▀ █ ▄▀▀ █▄▀ █ █
+  ████      ▀▀█▄  █  █ █   █▀▄  █
+██████      ▄▄▄▀  █  █ ▀▀▀ █ █  █
+████████
+████████    █▀▄  █ █ █▀▄
+ ██████     ██▀  █ █ █ █
+   ████     █▄▀  ▀▄▀ █ █
+     ▀▀
 
-${WHITE}🥐 Bun Sticky v${VERSION} .faf CLI${RESET}
-   ${BUN_ORANGE_DARK}Fastest bun under the sum.${RESET}
+🥐 Bun Sticky v${VERSION} .faf CLI
+   Fastest bun under the sum.
 
-${BUN_BLUE}────────────────────────────────────────────────${RESET}
+────────────────────────────────────────────────
 `;
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -127,7 +117,7 @@ async function cmdScore(): Promise<void> {
       console.log(`  ${DIM}project:${RESET}`);
       for (const slot of projectMissing) {
         const field = slot.replace("project.", "");
-        console.log(`    ${CYAN}${field}:${RESET} "${getHint(field)}"`);
+        console.log(`    ${DIM}${field}:${RESET} "${getHint(field)}"`);
       }
     }
 
@@ -135,7 +125,7 @@ async function cmdScore(): Promise<void> {
       console.log(`  ${DIM}stack:${RESET}`);
       for (const slot of stackMissing) {
         const field = slot.replace("stack.", "");
-        console.log(`    ${CYAN}${field}:${RESET} "${getHint(field)}"`);
+        console.log(`    ${DIM}${field}:${RESET} "${getHint(field)}"`);
       }
     }
 
@@ -143,7 +133,7 @@ async function cmdScore(): Promise<void> {
       console.log(`  ${DIM}human_context:${RESET}`);
       for (const slot of humanMissing) {
         const field = slot.replace("human_context.", "");
-        console.log(`    ${CYAN}${field}:${RESET} "${getHint(field)}"`);
+        console.log(`    ${DIM}${field}:${RESET} "${getHint(field)}"`);
       }
     }
     console.log();
