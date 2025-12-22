@@ -724,7 +724,7 @@ describe("Tier 7: WJTTC Championship", () => {
 
   test("T7.06 - Package.json metadata", async () => {
     const pkg = await Bun.file("./package.json").json();
-    expect(pkg.name).toBe("bun-sticky");
+    expect(pkg.name).toBe("bun-sticky-faf");
     expect(pkg.type).toBe("module");
     expect(pkg).toHaveProperty("bin");
   });

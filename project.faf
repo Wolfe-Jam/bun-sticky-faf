@@ -4,11 +4,11 @@
 faf_version: 2.5.0
 
 project:
-  name: bun-sticky
+  name: bun-sticky-faf
   goal: Bun-native FAF scoring CLI with wolfejam slot-based system
   main_language: TypeScript
   type: cli
-  version: 1.0.4
+  version: 1.0.5
 
 human_context:
   who: Developers using Bun for fast TypeScript CLIs
