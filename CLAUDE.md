@@ -2,6 +2,8 @@
 
 Fastest bun under the sum. Bun-native .faf CLI with Wolfejam slot-based scoring.
 
+**🏆 100% Trophy** - 9/9 slots filled
+
 ## Quick Commands
 
 ```bash
