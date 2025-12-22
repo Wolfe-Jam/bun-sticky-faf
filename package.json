@@ -22,6 +22,11 @@
   ],
   "author": "wolfejam",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wolfe-Jam/bun-sticky.git"
+  },
+  "homepage": "https://github.com/Wolfe-Jam/bun-sticky",
   "engines": {
     "bun": ">=1.0.0"
   },
