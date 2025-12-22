@@ -3,10 +3,10 @@
 ## Pre-Publish Checklist
 
 ### 1. Code Quality
-- [ ] All 45 tests passing (`bun test`)
-- [ ] Zero TypeScript errors
-- [ ] Zero runtime dependencies
-- [ ] Pure Bun APIs only
+- [x] All 177 tests passing (`bun test`)
+- [x] Zero TypeScript errors
+- [x] Zero runtime dependencies
+- [x] Pure Bun APIs only
 
 ### 2. Version Bump
 ```bash
@@ -18,44 +18,41 @@
 ### 3. Test Suite
 ```bash
 bun test
-# Expect: 45 pass, 0 fail
+# Expect: 177 pass, 0 fail
 ```
 
 ### 4. Manual Verification
 ```bash
-bun run index.ts --version
-bun run index.ts help
-bun run index.ts score
+bunx bun-sticky --version  # ✓
+bunx bun-sticky help       # ✓
+bunx bun-sticky init test  # ✓
+bunx bun-sticky score      # ✓
 ```
 
 ## Publish Commands
 
 ### npm Registry
 ```bash
-# Login (first time)
-npm login
-
-# Publish
-npm publish
+npm publish --access public
 ```
 
-### Bun Package Manager (future)
+### Verify
 ```bash
-# When Bun has its own registry
-bun publish
+npm view bun-sticky
+bunx bun-sticky help
 ```
 
 ## Post-Publish
 
-1. Tag release in git
-2. Update ZIG-n-RUST.md benchmarks
-3. Announce in faf-cli ecosystem
+1. [x] Tag release in git
+2. [ ] Update ZIG-n-RUST.md benchmarks
+3. [ ] Announce in faf-cli ecosystem
 
 ## Version History
 
 | Version | Date | Notes |
 |---------|------|-------|
-| 1.0.0 | TBD | Initial release - Wolfejam slot-based scoring |
+| 1.0.0 | 2024-12-22 | Initial release - Wolfejam slot-based scoring, 177 tests |
 
 ---
 
