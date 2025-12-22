@@ -1,6 +1,6 @@
 {
   "name": "bun-sticky-faf",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Fastest bun under the sum. FAF scoring CLI for Bun.",
   "main": "index.ts",
   "type": "module",
@@ -26,9 +26,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Wolfe-Jam/bun-sticky.git"
+    "url": "https://github.com/Wolfe-Jam/bun-sticky-faf.git"
   },
-  "homepage": "https://github.com/Wolfe-Jam/bun-sticky",
+  "homepage": "https://github.com/Wolfe-Jam/bun-sticky-faf",
   "engines": {
     "bun": ">=1.0.0"
   },
