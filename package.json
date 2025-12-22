@@ -1,0 +1,30 @@
+{
+  "name": "bun-sticky",
+  "version": "1.0.0",
+  "description": "Fastest bun under the sum. FAF scoring CLI for Bun.",
+  "main": "index.ts",
+  "type": "module",
+  "bin": {
+    "bun-sticky": "./index.ts"
+  },
+  "scripts": {
+    "start": "bun run index.ts",
+    "score": "bun run index.ts score",
+    "test": "bun test"
+  },
+  "keywords": [
+    "faf",
+    "bun",
+    "cli",
+    "scoring",
+    "wolfejam",
+    "ai-context"
+  ],
+  "author": "wolfejam",
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
