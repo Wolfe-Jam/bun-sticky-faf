@@ -3,7 +3,7 @@
 ## Pre-Publish Checklist
 
 ### 1. Code Quality
-- [x] All 177 tests passing (`bun test`)
+- [x] All 328 tests passing (`bun test`)
 - [x] Zero TypeScript errors
 - [x] Zero runtime dependencies
 - [x] Pure Bun APIs only
@@ -18,7 +18,7 @@
 ### 3. Test Suite
 ```bash
 bun test
-# Expect: 177 pass, 0 fail
+# Expect: 328 pass, 0 fail
 ```
 
 ### 4. Manual Verification

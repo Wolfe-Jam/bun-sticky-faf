@@ -5,7 +5,7 @@ Fastest bun under the sum. Bun-native .faf CLI with Wolfejam slot-based scoring.
 ## Quick Commands
 
 ```bash
-bun test                    # Run WJTTC test suite (200+ tests)
+bun test                    # Run WJTTC test suite (328 tests)
 bun run index.ts score      # Score current project
 bun run index.ts help       # Show commands
 bun publish                 # Publish to npm (see PUBLISH-PROTOCOL.md)

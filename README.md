@@ -29,7 +29,7 @@ bunx bun-sticky score
   Project   ████████████ 3/3
   Human     ████████░░░░ 4/6
 
-  🥉 78% Bronze
+  🟢 78% Green
   Filled: 7/9 slots
 ```
 
