@@ -3,7 +3,7 @@
 Fastest bun under the sum. Zero dependencies. Pure Bun.
 
 ```bash
-bunx bun-sticky score
+faf score
 ```
 
 ```
@@ -18,7 +18,7 @@ bunx bun-sticky score
    ████     █▄▀  ▀▄▀ █ █
      ▀▀
 
-🥐 Bun Sticky v1.0.3 .faf CLI
+🥐 Bun Sticky v1.0.4 .faf CLI
    Fastest bun under the sum.
 
 ────────────────────────────────────────────────
@@ -36,7 +36,7 @@ bunx bun-sticky score
 ## Install
 
 ```bash
-bun add -g bun-sticky
+npm install -g bun-sticky
 ```
 
 Or run directly:
@@ -48,10 +48,10 @@ bunx bun-sticky score
 ## Commands
 
 ```bash
-bun-sticky score      # Show FAF score + tier
-bun-sticky init myapp # Create project.faf
-bun-sticky sync       # Sync to CLAUDE.md
-bun-sticky help       # Show commands
+faf score      # Show FAF score + tier
+faf init myapp # Create project.faf
+faf sync       # Sync to CLAUDE.md
+faf help       # Show commands
 ```
 
 ## What is FAF?

@@ -20,7 +20,7 @@ import { getTier } from "./lib/tier.ts";
 // CONSTANTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const VERSION = "1.0.3";
+const VERSION = "1.0.4";
 
 // Standard colors only (B/W version - color reserved for ZIG poster child)
 const GREEN = "\x1b[32m";
@@ -61,7 +61,7 @@ async function cmdScore(): Promise<void> {
 
   if (!(await file.exists())) {
     console.log(`${RED}No project.faf found${RESET}`);
-    console.log(`${DIM}Run: bun-sticky init <name>${RESET}`);
+    console.log(`${DIM}Run: faf init <name>${RESET}`);
     process.exit(1);
   }
 
@@ -218,7 +218,7 @@ stack:
   await Bun.write("project.faf", template);
   console.log(BANNER);
   console.log(`  ${GREEN}Created${RESET} project.faf`);
-  console.log(`  ${DIM}Run: bun-sticky score${RESET}`);
+  console.log(`  ${DIM}Run: faf score${RESET}`);
   console.log();
 }
 
@@ -327,7 +327,7 @@ switch (cmd) {
   case "init":
     const name = args[1];
     if (!name) {
-      console.log(`${RED}Usage: bun-sticky init <name>${RESET}`);
+      console.log(`${RED}Usage: faf init <name>${RESET}`);
       process.exit(1);
     }
     await cmdInit(name);

@@ -31,10 +31,10 @@ Keep project.faf and CLAUDE.md in sync. Non-destructive - preserves your content
 ## Commands
 
 ```bash
-bun-sticky score      # Show FAF score + tier
-bun-sticky init myapp # Create project.faf
-bun-sticky sync       # Sync to CLAUDE.md
-bun-sticky help       # Show commands
+faf score      # Show FAF score + tier
+faf init myapp # Create project.faf
+faf sync       # Sync to CLAUDE.md
+faf help       # Show commands
 ```
 
 ---

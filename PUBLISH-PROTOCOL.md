@@ -56,6 +56,7 @@ bunx bun-sticky help
 | 1.0.1 | 2024-12-22 | Proper publish ceremony, version consistency |
 | 1.0.2 | 2025-12-22 | Test fixes (rounding, TIERS export, Empty tier) |
 | 1.0.3 | 2025-12-22 | Fix sync command overwriting CLAUDE.md |
+| 1.0.4 | 2025-12-22 | Binary renamed to `faf` for ecosystem consistency |
 
 ---
 
