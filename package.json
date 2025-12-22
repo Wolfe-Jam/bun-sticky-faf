@@ -10,7 +10,9 @@
   "scripts": {
     "start": "bun run index.ts",
     "score": "bun run index.ts score",
-    "test": "bun test"
+    "test": "bun test",
+    "sync-version": "node scripts/sync-version.cjs",
+    "version": "npm run sync-version && git add project.faf"
   },
   "keywords": [
     "faf",
