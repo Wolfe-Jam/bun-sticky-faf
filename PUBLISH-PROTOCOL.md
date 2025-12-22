@@ -53,6 +53,7 @@ bunx bun-sticky help
 | Version | Date | Notes |
 |---------|------|-------|
 | 1.0.0 | 2024-12-22 | Initial release - Wolfejam slot-based scoring, 177 tests |
+| 1.0.1 | 2024-12-22 | Proper publish ceremony, version consistency |
 
 ---
 

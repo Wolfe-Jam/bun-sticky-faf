@@ -1,6 +1,6 @@
 {
   "name": "bun-sticky",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fastest bun under the sum. FAF scoring CLI for Bun.",
   "main": "index.ts",
   "type": "module",

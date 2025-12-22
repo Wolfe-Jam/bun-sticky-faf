@@ -110,6 +110,7 @@ export interface FafScore {
   filled: number;
   total: number;
   score: number;
+  missing: string[];
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -215,11 +216,22 @@ export function calculateScore(faf: Record<string, unknown>): FafScore {
   // Calculate final score
   const score = total > 0 ? Math.round((filled / total) * 100) : 0;
 
+  // Find missing slots
+  const missing: string[] = [];
+  for (const category of applicableCategories) {
+    for (const slot of SLOTS[category]) {
+      if (!hasValue(faf, slot)) {
+        missing.push(slot);
+      }
+    }
+  }
+
   return {
     projectType,
     sections,
     filled,
     total,
     score,
+    missing,
   };
 }

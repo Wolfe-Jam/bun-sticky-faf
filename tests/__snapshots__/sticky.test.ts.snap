@@ -1,117 +1,5 @@
 // Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
-exports[`Tier 9: Snapshot Testing T9.01 - SLOTS structure snapshot 1`] = `
-{
-  "backend": [
-    "stack.backend",
-    "stack.api_type",
-    "stack.runtime",
-    "stack.database",
-    "stack.connection",
-  ],
-  "frontend": [
-    "stack.frontend",
-    "stack.css_framework",
-    "stack.ui_library",
-    "stack.state_management",
-  ],
-  "human": [
-    "human_context.who",
-    "human_context.what",
-    "human_context.why",
-    "human_context.where",
-    "human_context.when",
-    "human_context.how",
-  ],
-  "project": [
-    "project.name",
-    "project.goal",
-    "project.main_language",
-  ],
-  "universal": [
-    "stack.hosting",
-    "stack.build",
-    "stack.cicd",
-  ],
-}
-`;
-
-exports[`Tier 9: Snapshot Testing T9.02 - TYPE_CATEGORIES snapshot 1`] = `
-{
-  "api": [
-    "project",
-    "backend",
-    "universal",
-    "human",
-  ],
-  "cli": [
-    "project",
-    "human",
-  ],
-  "fullstack": [
-    "project",
-    "frontend",
-    "backend",
-    "universal",
-    "human",
-  ],
-  "library": [
-    "project",
-    "human",
-  ],
-  "mobile": [
-    "project",
-    "human",
-  ],
-  "unknown": [
-    "project",
-    "human",
-  ],
-  "webapp": [
-    "project",
-    "frontend",
-    "universal",
-    "human",
-  ],
-}
-`;
-
-exports[`Tier 9: Snapshot Testing T9.03 - Full CLI score result snapshot 1`] = `
-{
-  "filled": 9,
-  "projectType": "cli",
-  "score": 100,
-  "sections": {
-    "backend": {
-      "filled": 0,
-      "percentage": 0,
-      "total": 0,
-    },
-    "frontend": {
-      "filled": 0,
-      "percentage": 0,
-      "total": 0,
-    },
-    "human": {
-      "filled": 6,
-      "percentage": 100,
-      "total": 6,
-    },
-    "project": {
-      "filled": 3,
-      "percentage": 100,
-      "total": 3,
-    },
-    "universal": {
-      "filled": 0,
-      "percentage": 0,
-      "total": 0,
-    },
-  },
-  "total": 9,
-}
-`;
-
 exports[`Tier 2: Scoring Engine T2.07 - SLOTS structure snapshot 1`] = `
 {
   "backend": [
@@ -151,6 +39,7 @@ exports[`Tier 2: Scoring Engine T2.07 - SLOTS structure snapshot 1`] = `
 exports[`Tier 2: Scoring Engine T2.14 - Full CLI result snapshot 1`] = `
 {
   "filled": 9,
+  "missing": [],
   "projectType": "cli",
   "score": 100,
   "sections": {

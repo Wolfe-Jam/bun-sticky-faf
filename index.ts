@@ -20,7 +20,7 @@ import { getTier } from "./lib/tier.ts";
 // CONSTANTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const VERSION = "1.0.0";
+const VERSION = "1.0.1";
 
 // Bun Brand Colors (ANSI 256)
 const BUN_BLUE = "\x1b[38;5;39m";    // #00a6e1
@@ -112,6 +112,72 @@ async function cmdScore(): Promise<void> {
   console.log(`  ${tier.color}${tier.emoji} ${BOLD}${result.score}%${RESET} ${tier.color}${tier.name}${RESET}`);
   console.log(`  ${DIM}Filled: ${result.filled}/${result.total} slots${RESET}`);
   console.log();
+
+  // Show missing slots with copy-paste YAML
+  if (result.missing.length > 0) {
+    console.log(`  ${YELLOW}Add to project.faf:${RESET}`);
+    console.log();
+
+    // Group by section
+    const projectMissing = result.missing.filter(s => s.startsWith("project."));
+    const humanMissing = result.missing.filter(s => s.startsWith("human_context."));
+    const stackMissing = result.missing.filter(s => s.startsWith("stack."));
+
+    if (projectMissing.length > 0) {
+      console.log(`  ${DIM}project:${RESET}`);
+      for (const slot of projectMissing) {
+        const field = slot.replace("project.", "");
+        console.log(`    ${CYAN}${field}:${RESET} "${getHint(field)}"`);
+      }
+    }
+
+    if (stackMissing.length > 0) {
+      console.log(`  ${DIM}stack:${RESET}`);
+      for (const slot of stackMissing) {
+        const field = slot.replace("stack.", "");
+        console.log(`    ${CYAN}${field}:${RESET} "${getHint(field)}"`);
+      }
+    }
+
+    if (humanMissing.length > 0) {
+      console.log(`  ${DIM}human_context:${RESET}`);
+      for (const slot of humanMissing) {
+        const field = slot.replace("human_context.", "");
+        console.log(`    ${CYAN}${field}:${RESET} "${getHint(field)}"`);
+      }
+    }
+    console.log();
+  }
+}
+
+function getHint(field: string): string {
+  const hints: Record<string, string> = {
+    // Project
+    name: "Project name",
+    goal: "What problem does this solve?",
+    main_language: "TypeScript",
+    // Human context - questions that make you think
+    who: "Who is it for?",
+    what: "What does it do?",
+    why: "Why does it exist?",
+    where: "Where is it deployed/used?",
+    when: "When is it due/released?",
+    how: "How is it built?",
+    // Stack
+    frontend: "React",
+    css_framework: "Tailwind",
+    ui_library: "shadcn",
+    state_management: "zustand",
+    backend: "Node.js",
+    api_type: "REST",
+    runtime: "Bun",
+    database: "PostgreSQL",
+    connection: "prisma",
+    hosting: "Vercel",
+    build: "vite",
+    cicd: "GitHub Actions",
+  };
+  return hints[field] || "";
 }
 
 function formatBar(percent: number): string {
