@@ -18,7 +18,7 @@ bunx bun-sticky score
    ████     █▄▀  ▀▄▀ █ █
      ▀▀
 
-🥐 Bun Sticky v1.0.1 .faf CLI
+🥐 Bun Sticky v1.0.2 .faf CLI
    Fastest bun under the sum.
 
 ────────────────────────────────────────────────
@@ -97,7 +97,7 @@ Built for Bun's speed:
 
 ## Testing
 
-177 tests. Championship-grade WJTTC test suite.
+328 tests. Championship-grade WJTTC test suite.
 
 ```bash
 bun test
