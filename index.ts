@@ -20,7 +20,7 @@ import { getTier } from "./lib/tier.ts";
 // CONSTANTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const VERSION = "1.0.2";
+const VERSION = "1.0.3";
 
 // Standard colors only (B/W version - color reserved for ZIG poster child)
 const GREEN = "\x1b[32m";
@@ -237,20 +237,58 @@ async function cmdSync(): Promise<void> {
   const result = calculateScore(faf);
   const tier = getTier(result.score);
 
-  // Generate CLAUDE.md
-  const claudeMd = `# ${name}
+  const scoreBadge = `**${tier.emoji} ${result.score}% ${tier.name}** - ${result.filled}/${result.total} slots filled`;
+  const claudeFile = Bun.file("CLAUDE.md");
+
+  if (await claudeFile.exists()) {
+    // Update existing CLAUDE.md - preserve content, update/insert score badge
+    let existing = await claudeFile.text();
+    const badgePattern = /^\*\*[🏆🥇🥈🥉🟢🟡🔴⚪🍊]\s*\d+%.*\*\*.*slots filled$/mu;
+
+    if (badgePattern.test(existing)) {
+      // Replace existing badge
+      existing = existing.replace(badgePattern, scoreBadge);
+    } else {
+      // Insert badge after first paragraph (after title + description)
+      const lines = existing.split("\n");
+      let insertIndex = 1;
+
+      // Find first empty line after title
+      for (let i = 1; i < lines.length; i++) {
+        if (lines[i].trim() === "") {
+          insertIndex = i + 1;
+          // Skip consecutive empty lines
+          while (insertIndex < lines.length && lines[insertIndex].trim() === "") {
+            insertIndex++;
+          }
+          break;
+        }
+      }
+
+      // Check if next line is already a heading, insert before it
+      if (lines[insertIndex]?.startsWith("#")) {
+        lines.splice(insertIndex, 0, scoreBadge, "");
+      } else {
+        lines.splice(insertIndex, 0, "", scoreBadge);
+      }
+      existing = lines.join("\n");
+    }
+
+    await Bun.write("CLAUDE.md", existing);
+  } else {
+    // Create new minimal CLAUDE.md
+    const claudeMd = `# ${name}
 
 ${goal}
 
-## Score: ${tier.emoji} ${result.score}%
-
-Filled: ${result.filled}/${result.total} slots
+${scoreBadge}
 
 ---
 *Synced by Bun Sticky*
 `;
+    await Bun.write("CLAUDE.md", claudeMd);
+  }
 
-  await Bun.write("CLAUDE.md", claudeMd);
   console.log(BANNER);
   console.log(`  ${GREEN}Synced${RESET} project.faf → CLAUDE.md`);
   console.log();
