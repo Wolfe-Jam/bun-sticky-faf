@@ -6,7 +6,7 @@ Run the championship-grade test suite and report results.
 bun test --summary all
 ```
 
-Expected: All tests pass (200+)
+Expected: All tests pass (328+)
 
 If any tests fail:
 1. Identify the failing test
