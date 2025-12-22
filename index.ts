@@ -20,7 +20,7 @@ import { getTier } from "./lib/tier.ts";
 // CONSTANTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const VERSION = "1.0.1";
+const VERSION = "1.0.2";
 
 // Standard colors only (B/W version - color reserved for ZIG poster child)
 const GREEN = "\x1b[32m";

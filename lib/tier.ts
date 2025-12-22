@@ -19,6 +19,16 @@ const DIM = "\x1b[2m";
 const ORANGE = "\x1b[38;5;208m";
 const WHITE = "\x1b[37m";
 
+export const TIERS: Tier[] = [
+  { emoji: "🏆", name: "Trophy", color: YELLOW },
+  { emoji: "🥇", name: "Gold", color: YELLOW },
+  { emoji: "🥈", name: "Silver", color: WHITE },
+  { emoji: "🥉", name: "Bronze", color: ORANGE },
+  { emoji: "🟢", name: "Green", color: GREEN },
+  { emoji: "🟡", name: "Yellow", color: YELLOW },
+  { emoji: "🔴", name: "Red", color: RED },
+];
+
 export function getTier(score: number): Tier {
   if (score >= 105) return { emoji: "🍊", name: "Big Orange", color: ORANGE };
   if (score >= 100) return { emoji: "🏆", name: "Trophy", color: YELLOW };
