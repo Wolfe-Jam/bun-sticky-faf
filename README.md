@@ -1,4 +1,6 @@
-# bun-sticky
+# bun-sticky-faf
+
+> **Renamed from `bun-sticky`** (+439 downloads) to include `-faf` for the [IANA-registered FAF format](https://www.iana.org/assignments/media-types/application/vnd.faf+yaml).
 
 Fastest bun under the sum. Zero dependencies. Pure Bun.
 
@@ -18,7 +20,7 @@ faf score
    ████     █▄▀  ▀▄▀ █ █
      ▀▀
 
-🥐 Bun Sticky v1.0.4 .faf CLI
+🥐 bun-sticky-faf v1.0.6
    Fastest bun under the sum.
 
 ────────────────────────────────────────────────
@@ -36,13 +38,13 @@ faf score
 ## Install
 
 ```bash
-npm install -g bun-sticky
+npm install -g bun-sticky-faf
 ```
 
 Or run directly:
 
 ```bash
-bunx bun-sticky score
+bunx bun-sticky-faf score
 ```
 
 ## Commands
@@ -58,7 +60,7 @@ faf help       # Show commands
 
 **FAF** (Foundational AI-context Format) is project DNA for AI assistants. A `project.faf` file tells Claude, Cursor, Copilot, and other AI tools what your project is about.
 
-**bun-sticky** scores your project's AI-readiness using the Wolfejam slot-based system.
+**bun-sticky-faf** scores your project's AI-readiness using the Wolfejam slot-based system.
 
 ## Scoring
 
@@ -107,12 +109,16 @@ Full Bun test API coverage: `test.each`, `mock`, `spyOn`, `snapshots`, custom ma
 
 ## FAF Ecosystem
 
-| Package | Runtime | Downloads |
-|---------|---------|-----------|
-| [faf-cli](https://npmjs.com/package/faf-cli) | Node.js | 15,000+ |
-| **bun-sticky** | Bun | you are here |
-| xai-faf-zig | Zig | ultra-fast |
-| xai-faf-rust | Rust | WASM |
+**18,000+ npm downloads** across the FAF family:
+
+| Package | Runtime | Notes |
+|---------|---------|-------|
+| [faf-cli](https://npmjs.com/package/faf-cli) | Node.js | 16,000+ |
+| [claude-faf-mcp](https://npmjs.com/package/claude-faf-mcp) | MCP | uses faf-cli |
+| **bun-sticky-faf** | Bun | 500+* |
+| [bun-sticky-zig](https://github.com/Wolfe-Jam/bun-sticky-zig) | Zig | 77KB binary |
+
+*\*includes bun-sticky prior to rename*
 
 ## Philosophy
 
