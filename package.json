@@ -1,11 +1,11 @@
 {
-  "name": "bun-sticky-faf",
-  "version": "1.0.6",
+  "name": "bun-sticky",
+  "version": "1.0.8",
   "description": "Fastest bun under the sum. FAF scoring CLI for Bun.",
   "main": "index.ts",
   "type": "module",
   "bin": {
-    "faf": "./index.ts"
+    "bun-sticky": "./index.ts"
   },
   "scripts": {
     "start": "bun run index.ts",
