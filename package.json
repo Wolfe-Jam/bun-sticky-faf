@@ -5,7 +5,7 @@
   "main": "index.ts",
   "type": "module",
   "bin": {
-    "bun-sticky": "./index.ts"
+    "bun-sticky": "index.ts"
   },
   "scripts": {
     "start": "bun run index.ts",
@@ -35,7 +35,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Wolfe-Jam/bun-sticky-faf.git"
+    "url": "git+https://github.com/Wolfe-Jam/bun-sticky-faf.git"
   },
   "homepage": "https://faf.one",
   "engines": {
