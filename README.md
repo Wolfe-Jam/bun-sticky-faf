@@ -33,6 +33,29 @@ faf score
   Filled: 7/9 slots
 ```
 
+## The Full Bun Toolchain
+
+Like this? The full toolchain is here:
+
+```bash
+bunx faf-cli auto
+```
+
+**0% to 100% AI context in 0.5s.** Same toolchain Claude Code ships on. Zero code changes needed -- faf-cli v5.0.6 runs natively on Bun with 35 dedicated compatibility tests.
+
+Three ways in:
+```bash
+bunx faf-cli auto          # Bun (you're here)
+npx faf-cli auto           # npm
+brew install rust-faf-cli  # Homebrew
+```
+
+bun-sticky is the Bun-native scorer. faf-cli is the full engine: `init`, `auto`, `go`, `bi-sync`, `tri-sync`, and 30+ MCP tools.
+
+Read the full story: [Best Context Under the Bun](https://faf.one/blog/best-context-under-the-bun)
+
+---
+
 ## Install
 
 ```bash
@@ -107,11 +130,11 @@ Full Bun test API coverage: `test.each`, `mock`, `spyOn`, `snapshots`, custom ma
 
 ## FAF Ecosystem
 
-**18,000+ npm downloads** across the FAF family:
+**30,000+ npm downloads** across the FAF family:
 
 | Package | Runtime | Notes |
 |---------|---------|-------|
-| [faf-cli](https://npmjs.com/package/faf-cli) | Node.js | 16,000+ |
+| [faf-cli](https://npmjs.com/package/faf-cli) | Node.js + Bun | 30,000+ |
 | [claude-faf-mcp](https://npmjs.com/package/claude-faf-mcp) | MCP | uses faf-cli |
 | **bun-sticky** | Bun | 500+ |
 | [bun-sticky-zig](https://github.com/Wolfe-Jam/bun-sticky-zig) | Zig | 77KB binary |
@@ -133,4 +156,4 @@ MIT
 
 ---
 
-*Part of the FAF ecosystem. Made for Claude Code.*
+*Part of the FAF ecosystem. Made for Claude Code. Gateway to [faf-cli](https://npmjs.com/package/faf-cli).*
