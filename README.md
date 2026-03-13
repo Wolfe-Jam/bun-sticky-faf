@@ -3,7 +3,7 @@
 Fastest bun under the sum. Zero dependencies. Pure Bun.
 
 ```bash
-faf score
+bunx bun-sticky score
 ```
 
 ```
@@ -18,7 +18,7 @@ faf score
    ████     █▄▀  ▀▄▀ █ █
      ▀▀
 
-🥐 Bun Sticky v1.0.8
+🥐 Bun Sticky v1.1.0
    Fastest bun under the sum.
 
 ────────────────────────────────────────────────
@@ -33,59 +33,33 @@ faf score
   Filled: 7/9 slots
 ```
 
-## The Full Bun Toolchain
+## What is This?
 
-Like this? The full toolchain is here:
+**Bun Sticky** scores your project's AI-readiness. Drop a `project.faf` file in your repo and AI tools (Claude, Cursor, Copilot) instantly understand your project.
 
-```bash
-bunx faf-cli auto
-```
+[FAF](https://faf.one) (Foundational AI-context Format) is an [IANA-registered](https://www.iana.org/assignments/media-types/application/vnd.faf+yaml) format — project DNA for AI assistants.
 
-**0% to 100% AI context in 0.5s.** Same toolchain Claude Code ships on. Zero code changes needed -- faf-cli v5.0.6 runs natively on Bun with 35 dedicated compatibility tests.
+Also available as a [Zig-native parser](https://github.com/Wolfe-Jam/bun-sticky-zig) — 2.7KB WASM. Bun is built on Zig.
 
-Three ways in:
-```bash
-bunx faf-cli auto          # Bun (you're here)
-npx faf-cli auto           # npm
-brew install rust-faf-cli  # Homebrew
-```
+## Try It
 
-bun-sticky is the Bun-native scorer. faf-cli is the full engine: `init`, `auto`, `go`, `bi-sync`, `tri-sync`, and 30+ MCP tools.
-
-Read the full story: [Best Context Under the Bun](https://faf.one/blog/best-context-under-the-bun)
-
----
-
-## Install
+No install needed:
 
 ```bash
-npm install -g bun-sticky-faf
+bunx bun-sticky score     # Score your project
+bunx bun-sticky init myapp  # Create project.faf
+bunx bun-sticky sync      # Sync to CLAUDE.md
 ```
 
-Or run directly:
+Or install globally:
 
 ```bash
-bunx bun-sticky-faf score
+bun install -g bun-sticky
 ```
-
-## Commands
-
-```bash
-faf score      # Show FAF score + tier
-faf init myapp # Create project.faf
-faf sync       # Sync to CLAUDE.md
-faf help       # Show commands
-```
-
-## What is FAF?
-
-**FAF** (Foundational AI-context Format) is project DNA for AI assistants. A `project.faf` file tells Claude, Cursor, Copilot, and other AI tools what your project is about.
-
-**Bun Sticky** scores your project's AI-readiness using the Wolfejam slot-based system.
 
 ## Scoring
 
-21 slots across 5 categories. Type-aware scoring:
+21 slots across 5 categories. Type-aware — a CLI scores differently than a fullstack app:
 
 | Type | Slots | Categories |
 |------|-------|------------|
@@ -111,8 +85,6 @@ faf help       # Show commands
 
 ## Speed
 
-Built for Bun's speed:
-
 - **Cold start**: <50ms
 - **Score command**: <100ms
 - **Zero dependencies**: Pure Bun APIs
@@ -120,35 +92,36 @@ Built for Bun's speed:
 
 ## Testing
 
-328 tests. Championship-grade WJTTC test suite.
+328 tests. Full Bun test API coverage: `test.each`, `mock`, `spyOn`, `snapshots`, custom matchers.
 
 ```bash
 bun test
 ```
 
-Full Bun test API coverage: `test.each`, `mock`, `spyOn`, `snapshots`, custom matchers.
+## Want More?
+
+bun-sticky scores your project. **faf-cli** is the full toolchain — 64 commands, 30+ MCP tools, bi-sync, tri-sync, and more.
+
+```bash
+bunx faf-cli auto          # Bun
+npx faf-cli auto           # npm
+brew install faf-cli && faf auto  # Homebrew
+```
+
+0% to 100% AI context in 0.5s. Same toolchain Claude Code ships on.
+
+Read more: [Best Context Under the Bun](https://faf.one/blog/best-context-under-the-bun)
 
 ## FAF Ecosystem
 
 **30,000+ npm downloads** across the FAF family:
 
-| Package | Runtime | Notes |
-|---------|---------|-------|
+| Package | Runtime | Downloads |
+|---------|---------|-----------|
 | [faf-cli](https://npmjs.com/package/faf-cli) | Node.js + Bun | 30,000+ |
-| [claude-faf-mcp](https://npmjs.com/package/claude-faf-mcp) | MCP | uses faf-cli |
-| **bun-sticky** | Bun | 500+ |
-| [bun-sticky-zig](https://github.com/Wolfe-Jam/bun-sticky-zig) | Zig | 77KB binary |
-
-## Philosophy
-
-Built the Anthropic way:
-
-- First principles
-- Zero dependencies
-- Native Bun APIs
-- TypeScript native
-
-Wolfejam slot-based scoring. Not Elon weights.
+| [claude-faf-mcp](https://npmjs.com/package/claude-faf-mcp) | MCP | 1,000+/week |
+| **bun-sticky** | Bun | 1,100+ |
+| [bun-sticky-zig](https://github.com/Wolfe-Jam/bun-sticky-zig) | Zig | 2.7KB WASM |
 
 ## License
 
@@ -156,4 +129,4 @@ MIT
 
 ---
 
-*Part of the FAF ecosystem. Made for Claude Code. Gateway to [faf-cli](https://npmjs.com/package/faf-cli).*
+*Part of the [FAF ecosystem](https://faf.one). 1,100+ downloads and counting.*

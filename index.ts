@@ -20,7 +20,7 @@ import { getTier } from "./lib/tier.ts";
 // CONSTANTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const VERSION = "1.0.4";
+const VERSION = "1.1.0";
 
 // Standard colors only (B/W version - color reserved for ZIG poster child)
 const GREEN = "\x1b[32m";
@@ -306,6 +306,9 @@ function cmdHelp(): void {
   console.log();
   console.log(`  ${DIM}Zero dependencies. Pure Bun.${RESET}`);
   console.log(`  ${DIM}Wolfejam slot-based scoring.${RESET}`);
+  console.log();
+  console.log(`  ${DIM}Full toolchain: ${GREEN}bunx faf-cli auto${RESET}`);
+  console.log(`  ${DIM}https://faf.one${RESET}`);
   console.log();
 }
 

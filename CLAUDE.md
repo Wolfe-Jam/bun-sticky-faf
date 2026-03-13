@@ -29,7 +29,7 @@ bun-sticky/
 
 ## Scoring System
 
-**Wolfejam Slot-Based Scoring** (NOT Elon weights):
+**Wolfejam Slot-Based Scoring**:
 
 - 21 total slots across 5 categories
 - Type-aware: CLI=9, Fullstack=21, etc.

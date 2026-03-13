@@ -1,7 +1,7 @@
 {
   "name": "bun-sticky",
-  "version": "1.0.8",
-  "description": "Fastest bun under the sum. FAF scoring CLI for Bun.",
+  "version": "1.1.0",
+  "description": "Fastest bun under the sum. FAF scoring CLI for Bun. Bunx Edition.",
   "main": "index.ts",
   "type": "module",
   "bin": {
@@ -18,10 +18,18 @@
   "keywords": [
     "faf",
     "bun",
+    "bun-native",
+    "bunx",
     "cli",
     "scoring",
     "wolfejam",
-    "ai-context"
+    "ai-context",
+    "ai-readiness",
+    "project-dna",
+    "context-engineering",
+    "iana",
+    "claude",
+    "persistent-context"
   ],
   "author": "wolfejam",
   "license": "MIT",
@@ -29,7 +37,7 @@
     "type": "git",
     "url": "https://github.com/Wolfe-Jam/bun-sticky-faf.git"
   },
-  "homepage": "https://github.com/Wolfe-Jam/bun-sticky-faf",
+  "homepage": "https://faf.one",
   "engines": {
     "bun": ">=1.0.0"
   },
