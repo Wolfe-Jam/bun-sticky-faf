@@ -300,7 +300,8 @@ describe("Tier 2: Scoring Engine", () => {
     const cliFaf = { project: { type: "cli" } };
     const result = calculateScore(cliFaf);
     expect(result.projectType).toBe("cli");
-    expect(result.total).toBe(9);
+    // Without slotignored values, all 21 slots are active
+    expect(result.total).toBe(21);
   });
 
   test("T2.03 - Fullstack type has 21 applicable slots", async () => {
@@ -311,7 +312,7 @@ describe("Tier 2: Scoring Engine", () => {
     expect(result.total).toBe(21);
   });
 
-  test("T2.04 - Full CLI scores 100%", async () => {
+  test("T2.04 - CLI with slotignored scores 100%", async () => {
     const { calculateScore } = await import("../lib/scorer.ts");
     const fullCli = {
       project: {
@@ -328,22 +329,36 @@ describe("Tier 2: Scoring Engine", () => {
         when: "always",
         how: "bun run",
       },
+      stack: {
+        frontend: "slotignored",
+        css_framework: "slotignored",
+        ui_library: "slotignored",
+        state_management: "slotignored",
+        backend: "slotignored",
+        api_type: "slotignored",
+        runtime: "Bun",
+        database: "slotignored",
+        connection: "slotignored",
+        hosting: "slotignored",
+        build: "bun build",
+        cicd: "slotignored",
+      },
     };
     const result = calculateScore(fullCli);
     expect(result.score).toBe(100);
-    expect(result.filled).toBe(9);
-    expect(result.total).toBe(9);
+    expect(result.filled).toBe(11);
+    expect(result.total).toBe(11);
   });
 
-  test("T2.05 - Partial CLI scores correctly", async () => {
+  test("T2.05 - Partial scores correctly (all 21 active)", async () => {
     const { calculateScore } = await import("../lib/scorer.ts");
     const partial = {
       project: { type: "cli", name: "test" },
     };
     const result = calculateScore(partial);
     expect(result.filled).toBe(1);
-    expect(result.total).toBe(9);
-    expect(result.score).toBe(11);
+    expect(result.total).toBe(21);
+    expect(result.score).toBe(5);
   });
 
   test("T2.06 - 21 total slots defined", async () => {
@@ -375,15 +390,16 @@ describe("Tier 2: Scoring Engine", () => {
   });
 
   test.each([
-    ["cli", 9],
-    ["library", 9],
-    ["api", 17],
-    ["webapp", 16],
+    ["cli", 21],
+    ["library", 21],
+    ["api", 21],
+    ["webapp", 21],
     ["fullstack", 21],
-    ["mobile", 9],
-    ["unknown", 9],
-  ] as const)("T2.09 - Type '%s' has %d slots", async (type, slots) => {
+    ["mobile", 21],
+    ["unknown", 21],
+  ] as const)("T2.09 - Type '%s' without slotignored has %d active slots", async (type, slots) => {
     const { calculateScore } = await import("../lib/scorer.ts");
+    // Without slotignored values, all 21 slots are active regardless of type
     const faf = { project: { type } };
     const result = calculateScore(faf);
     expect(result.total).toBe(slots);
@@ -414,7 +430,7 @@ describe("Tier 2: Scoring Engine", () => {
     expect(result.score).toBeValidScore();
   });
 
-  test("T2.14 - Full CLI result snapshot", async () => {
+  test("T2.14 - Full CLI with slotignored result snapshot", async () => {
     const { calculateScore } = await import("../lib/scorer.ts");
     const fullCli = {
       project: {
@@ -431,14 +447,30 @@ describe("Tier 2: Scoring Engine", () => {
         when: "e",
         how: "f",
       },
+      stack: {
+        frontend: "slotignored",
+        css_framework: "slotignored",
+        ui_library: "slotignored",
+        state_management: "slotignored",
+        backend: "slotignored",
+        api_type: "slotignored",
+        runtime: "Bun",
+        database: "slotignored",
+        connection: "slotignored",
+        hosting: "slotignored",
+        build: "bun build",
+        cicd: "slotignored",
+      },
     };
     const result = calculateScore(fullCli);
-    expect(result).toMatchSnapshot();
+    expect(result.score).toBe(100);
+    expect(result.filled).toBe(11);
+    expect(result.ignored).toBe(10);
   });
 
-  test("T2.15 - TYPE_CATEGORIES snapshot", async () => {
-    const { TYPE_CATEGORIES } = await import("../lib/scorer.ts");
-    expect(TYPE_CATEGORIES).toMatchSnapshot();
+  test("T2.15 - SECTIONS has all 5 groups", async () => {
+    const { SECTIONS } = await import("../lib/scorer.ts");
+    expect(Object.keys(SECTIONS)).toEqual(["project", "human", "frontend", "backend", "universal"]);
   });
 });
 
@@ -1223,10 +1255,11 @@ describe("Tier 16: Edge Cases", () => {
     expect(result.score).toBe(0);
   });
 
-  test("T16.05 - Unknown type defaults to 9 slots", async () => {
+  test("T16.05 - Unknown type defaults to 21 active slots", async () => {
     const { calculateScore } = await import("../lib/scorer.ts");
+    // Without slotignored values, all 21 slots are active
     const result = calculateScore({ project: { type: "banana" } });
-    expect(result.total).toBe(9);
+    expect(result.total).toBe(21);
   });
 
   test("T16.06 - Special characters in name", async () => {

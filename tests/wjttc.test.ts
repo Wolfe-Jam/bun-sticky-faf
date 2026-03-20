@@ -220,7 +220,7 @@ project:
 
 describe("🏁 WJTTC Race 3: Score Calculations", () => {
   describe("Wolfejam formula verification", () => {
-    test("score = (filled / applicable) × 100", () => {
+    test("score = (filled / active) × 100", () => {
       const faf = parseYaml(`
 project:
   name: Test
@@ -232,45 +232,59 @@ human_context:
   what: A CLI tool
 `);
       const result = calculateScore(faf);
-      // 5 filled / 9 applicable = 55.55% → rounds to 56%
+      // 5 filled / 21 active (no slotignored) = 23.8% → rounds to 24%
       expect(result.filled).toBe(5);
-      expect(result.total).toBe(9);
-      expect(result.score).toBe(56);
+      expect(result.total).toBe(21);
+      expect(result.score).toBe(24);
     });
   });
 
-  describe("type-aware slot counting", () => {
+  describe("data-driven slot counting", () => {
     const slotCountCases: Array<[ProjectType, number]> = [
-      ["cli", 9],
-      ["library", 9],
-      ["api", 17],
-      ["webapp", 16],
+      ["cli", 21],
+      ["library", 21],
+      ["api", 21],
+      ["webapp", 21],
       ["fullstack", 21],
-      ["mobile", 9],
-      ["unknown", 9],
+      ["mobile", 21],
+      ["unknown", 21],
     ];
 
     test.each(slotCountCases)(
-      "%s type has %d applicable slots",
+      "%s type without slotignored has %d active slots",
       (type, expected) => {
         const faf = parseYaml(`
 project:
   type: ${type}
 `);
         const result = calculateScore(faf);
+        // Without slotignored, all 21 are active
         expect(result.total).toBe(expected);
       }
     );
   });
 
   describe("100% score scenarios", () => {
-    test("CLI with all 9 slots filled = 100%", () => {
+    test("CLI with slotignored = 100%", () => {
       const faf = parseYaml(`
 project:
   name: PerfectCLI
   goal: Achieve perfection
   main_language: Zig
   type: cli
+stack:
+  frontend: slotignored
+  css_framework: slotignored
+  ui_library: slotignored
+  state_management: slotignored
+  backend: slotignored
+  api_type: slotignored
+  runtime: Bun
+  database: slotignored
+  connection: slotignored
+  hosting: slotignored
+  build: bun build
+  cicd: slotignored
 human_context:
   who: Developers
   what: A CLI tool
@@ -281,8 +295,8 @@ human_context:
 `);
       const result = calculateScore(faf);
       expect(result.score).toBe(100);
-      expect(result.filled).toBe(9);
-      expect(result.total).toBe(9);
+      expect(result.filled).toBe(11);
+      expect(result.total).toBe(11);
     });
 
     test("Fullstack with all 21 slots filled = 100%", () => {
@@ -886,6 +900,19 @@ project:
   goal: Test the full workflow
   main_language: TypeScript
   type: cli
+stack:
+  frontend: slotignored
+  css_framework: slotignored
+  ui_library: slotignored
+  state_management: slotignored
+  backend: slotignored
+  api_type: slotignored
+  runtime: Bun
+  database: slotignored
+  connection: slotignored
+  hosting: slotignored
+  build: bun build
+  cicd: slotignored
 human_context:
   who: Developers
   what: A CLI tool
@@ -900,8 +927,8 @@ human_context:
 
     expect(faf.project.name).toBe("Integration Test");
     expect(result.projectType).toBe("cli");
-    expect(result.filled).toBe(9);
-    expect(result.total).toBe(9);
+    expect(result.filled).toBe(11);
+    expect(result.total).toBe(11);
     expect(result.score).toBe(100);
     expect(tierResult.name).toBe("Trophy");
     expect(tierResult.emoji).toBe("🏆");

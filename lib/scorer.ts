@@ -1,59 +1,82 @@
 /**
  * 🥐 Bun Sticky Scorer - Wolfejam Slot-Based Scoring
  *
- * Score = (Filled slots / Applicable slots) × 100
+ * Score = (Populated slots / Active slots) × 100
+ * Active = Total - Slotignored
  *
- * 21 total slots, type-aware scoring.
+ * 21 total slots. Data-driven slotignore.
+ * Same logic as WASM Mk4 — all engines get the same score.
  * Zero dependencies. Pure Bun.
  */
 
-import { hasValue, getNestedValue } from "./parser.ts";
+import { getNestedValue } from "./parser.ts";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// SLOT DEFINITIONS - 21 Slots Total
+// ALL 21 SLOTS - Flat list, same as WASM Mk4
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-export const SLOTS = {
-  // Project slots (3)
-  project: [
-    "project.name",
-    "project.goal",
-    "project.main_language",
-  ],
-  // Frontend slots (4)
-  frontend: [
-    "stack.frontend",
-    "stack.css_framework",
-    "stack.ui_library",
-    "stack.state_management",
-  ],
-  // Backend slots (5)
-  backend: [
-    "stack.backend",
-    "stack.api_type",
-    "stack.runtime",
-    "stack.database",
-    "stack.connection",
-  ],
-  // Universal slots (3)
-  universal: [
-    "stack.hosting",
-    "stack.build",
-    "stack.cicd",
-  ],
-  // Human context slots (6)
-  human: [
-    "human_context.who",
-    "human_context.what",
-    "human_context.why",
-    "human_context.where",
-    "human_context.when",
-    "human_context.how",
-  ],
-} as const;
+export const ALL_SLOTS = [
+  // Project (3)
+  "project.name",
+  "project.goal",
+  "project.main_language",
+  // Human (6)
+  "human_context.who",
+  "human_context.what",
+  "human_context.why",
+  "human_context.where",
+  "human_context.when",
+  "human_context.how",
+  // Stack (12)
+  "stack.frontend",
+  "stack.css_framework",
+  "stack.ui_library",
+  "stack.state_management",
+  "stack.backend",
+  "stack.api_type",
+  "stack.runtime",
+  "stack.database",
+  "stack.connection",
+  "stack.hosting",
+  "stack.build",
+  "stack.cicd",
+] as const;
+
+// Section grouping (for display only — scoring is flat)
+// SLOTS alias for backward compat with tests
+export const SECTIONS: Record<string, readonly string[]> = {
+  project: ALL_SLOTS.slice(0, 3),
+  human: ALL_SLOTS.slice(3, 9),
+  frontend: ["stack.frontend", "stack.css_framework", "stack.ui_library", "stack.state_management"],
+  backend: ["stack.backend", "stack.api_type", "stack.runtime", "stack.database", "stack.connection"],
+  universal: ["stack.hosting", "stack.build", "stack.cicd"],
+};
+
+// Backward compat alias
+export const SLOTS = SECTIONS;
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// TYPE DEFINITIONS - Which slots apply to each type
+// SLOT STATE — Same three states as WASM Mk4
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export type SlotState = "populated" | "empty" | "slotignored";
+
+function getSlotState(faf: Record<string, unknown>, path: string): SlotState {
+  const value = getNestedValue(faf, path);
+
+  // Missing or empty = empty
+  if (value === undefined || value === null) return "empty";
+  if (typeof value === "string" && value.trim() === "") return "empty";
+
+  // Literal "slotignored" = slotignored
+  if (typeof value === "string" && value.trim().toLowerCase() === "slotignored") return "slotignored";
+
+  // Anything else = populated
+  return "populated";
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TYPE DETECTION (for display, NOT for scoring)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export type ProjectType =
@@ -65,28 +88,33 @@ export type ProjectType =
   | "mobile"
   | "unknown";
 
-export const TYPE_CATEGORIES: Record<ProjectType, (keyof typeof SLOTS)[]> = {
-  // CLI/Tool: 9 slots (project + human)
-  cli: ["project", "human"],
+export function detectProjectType(faf: Record<string, unknown>): ProjectType {
+  const type = getNestedValue(faf, "project.type") as string;
 
-  // Library/Package: 9 slots (project + human)
-  library: ["project", "human"],
+  if (type) {
+    const typeLower = type.toLowerCase();
+    if (typeLower.includes("cli")) return "cli";
+    if (typeLower.includes("lib") || typeLower.includes("package")) return "library";
+    if (typeLower.includes("api") || typeLower.includes("backend")) return "api";
+    if (typeLower.includes("web") || typeLower.includes("frontend")) return "webapp";
+    if (typeLower.includes("full")) return "fullstack";
+    if (typeLower.includes("mobile") || typeLower.includes("app")) return "mobile";
+  }
 
-  // API/Backend: 17 slots (project + backend + universal + human)
-  api: ["project", "backend", "universal", "human"],
+  // Infer from stack (only non-slotignored values count)
+  const frontendState = getSlotState(faf, "stack.frontend");
+  const backendState = getSlotState(faf, "stack.backend");
+  const dbState = getSlotState(faf, "stack.database");
 
-  // Web App: 16 slots (project + frontend + universal + human)
-  webapp: ["project", "frontend", "universal", "human"],
+  const hasFrontend = frontendState === "populated";
+  const hasBackend = backendState === "populated" || dbState === "populated";
 
-  // Fullstack: 21 slots (all)
-  fullstack: ["project", "frontend", "backend", "universal", "human"],
+  if (hasFrontend && hasBackend) return "fullstack";
+  if (hasFrontend) return "webapp";
+  if (hasBackend) return "api";
 
-  // Mobile: 9 slots (project + human) - simplified
-  mobile: ["project", "human"],
-
-  // Unknown: 9 slots (project + human) - safe default
-  unknown: ["project", "human"],
-};
+  return "unknown";
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // SCORE INTERFACE
@@ -95,6 +123,7 @@ export const TYPE_CATEGORIES: Record<ProjectType, (keyof typeof SLOTS)[]> = {
 export interface SlotSection {
   filled: number;
   total: number;
+  ignored: number;
   percentage: number;
 }
 
@@ -109,120 +138,71 @@ export interface FafScore {
   };
   filled: number;
   total: number;
+  ignored: number;
+  active: number;
   score: number;
   missing: string[];
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// SCORING FUNCTIONS
+// SCORING — Data-driven, same as WASM
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-/**
- * Detect project type from .faf content
- */
-export function detectProjectType(faf: Record<string, unknown>): ProjectType {
-  const type = getNestedValue(faf, "project.type") as string;
-
-  if (type) {
-    const typeLower = type.toLowerCase();
-    if (typeLower.includes("cli")) return "cli";
-    if (typeLower.includes("lib") || typeLower.includes("package")) return "library";
-    if (typeLower.includes("api") || typeLower.includes("backend")) return "api";
-    if (typeLower.includes("web") || typeLower.includes("frontend")) return "webapp";
-    if (typeLower.includes("full")) return "fullstack";
-    if (typeLower.includes("mobile") || typeLower.includes("app")) return "mobile";
-  }
-
-  // Infer from stack
-  const hasFrontend = hasValue(faf, "stack.frontend");
-  const hasBackend = hasValue(faf, "stack.backend") || hasValue(faf, "stack.database");
-
-  if (hasFrontend && hasBackend) return "fullstack";
-  if (hasFrontend) return "webapp";
-  if (hasBackend) return "api";
-
-  return "unknown";
-}
-
-/**
- * Count filled slots in a section
- */
 function countSection(
   faf: Record<string, unknown>,
   slots: readonly string[],
-  applies: boolean
 ): SlotSection {
-  if (!applies) {
-    return { filled: 0, total: 0, percentage: 0 };
-  }
-
   let filled = 0;
+  let ignored = 0;
+
   for (const slot of slots) {
-    if (hasValue(faf, slot)) filled++;
+    const state = getSlotState(faf, slot);
+    if (state === "populated") filled++;
+    if (state === "slotignored") ignored++;
   }
 
   const total = slots.length;
-  const percentage = total > 0 ? Math.round((filled / total) * 100) : 0;
+  const active = total - ignored;
+  const percentage = active > 0 ? Math.round((filled / active) * 100) : 0;
 
-  return { filled, total, percentage };
+  return { filled, total: active, ignored, percentage };
 }
 
 /**
- * Calculate score using wolfejam slot-based system
- * Score = (Filled slots / Applicable slots) × 100
+ * Calculate score — data-driven slotignore.
+ * Score = (Populated / Active) × 100
+ * Active = Total - Slotignored
+ *
+ * All engines read the same .faf, all engines get the same score.
  */
 export function calculateScore(faf: Record<string, unknown>): FafScore {
   const projectType = detectProjectType(faf);
-  const applicableCategories = TYPE_CATEGORIES[projectType];
 
-  // Count each section
   const sections = {
-    project: countSection(
-      faf,
-      SLOTS.project,
-      applicableCategories.includes("project")
-    ),
-    frontend: countSection(
-      faf,
-      SLOTS.frontend,
-      applicableCategories.includes("frontend")
-    ),
-    backend: countSection(
-      faf,
-      SLOTS.backend,
-      applicableCategories.includes("backend")
-    ),
-    universal: countSection(
-      faf,
-      SLOTS.universal,
-      applicableCategories.includes("universal")
-    ),
-    human: countSection(
-      faf,
-      SLOTS.human,
-      applicableCategories.includes("human")
-    ),
+    project: countSection(faf, SECTIONS.project),
+    frontend: countSection(faf, SECTIONS.frontend),
+    backend: countSection(faf, SECTIONS.backend),
+    universal: countSection(faf, SECTIONS.universal),
+    human: countSection(faf, SECTIONS.human),
   };
 
-  // Sum totals
   let filled = 0;
-  let total = 0;
+  let active = 0;
+  let ignored = 0;
 
   for (const section of Object.values(sections)) {
     filled += section.filled;
-    total += section.total;
+    active += section.total; // total already excludes ignored
+    ignored += section.ignored;
   }
 
-  // Calculate final score
-  const score = total > 0 ? Math.round((filled / total) * 100) : 0;
+  const score = active > 0 ? Math.round((filled / active) * 100) : 0;
 
-  // Find missing slots
+  // Missing = empty slots (not slotignored)
   const missing: string[] = [];
-  for (const category of applicableCategories) {
-    for (const slot of SLOTS[category]) {
-      if (!hasValue(faf, slot)) {
-        missing.push(slot);
-      }
+  for (const slot of ALL_SLOTS) {
+    if (getSlotState(faf, slot) === "empty") {
+      missing.push(slot);
     }
   }
 
@@ -230,7 +210,9 @@ export function calculateScore(faf: Record<string, unknown>): FafScore {
     projectType,
     sections,
     filled,
-    total,
+    total: active,
+    ignored,
+    active,
     score,
     missing,
   };

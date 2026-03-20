@@ -1,7 +1,7 @@
 {
   "name": "bun-sticky",
-  "version": "1.1.0",
-  "description": "Fastest bun under the sum. FAF scoring CLI for Bun. Bunx Edition.",
+  "version": "2.0.0",
+  "description": "Fastest bun under the sum. FAF scoring for Bun — powered by Mk4 WASM.",
   "main": "index.ts",
   "type": "module",
   "bin": {
@@ -29,7 +29,9 @@
     "context-engineering",
     "iana",
     "claude",
-    "persistent-context"
+    "persistent-context",
+    "wasm",
+    "mk4"
   ],
   "author": "wolfejam",
   "license": "MIT",
