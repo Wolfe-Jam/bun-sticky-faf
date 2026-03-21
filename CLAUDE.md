@@ -2,15 +2,16 @@
 
 Fastest bun under the sum. Bun-native .faf CLI with Wolfejam slot-based scoring.
 
-**🏆 100% Trophy** - 9/9 slots filled
+**🏆 100% Trophy** - 11/11 slots filled
 
 ## Quick Commands
 
 ```bash
-bun test                    # Run WJTTC test suite (328 tests)
+bun test                    # Run test suite (369 tests)
 bun run index.ts score      # Score current project
+bun run index.ts wasm-score # Score via Mk4 WASM kernel
+bun run index.ts bench      # Benchmark: 284μs per score
 bun run index.ts help       # Show commands
-bun publish                 # Publish to npm (see PUBLISH-PROTOCOL.md)
 ```
 
 ## Architecture
@@ -19,11 +20,17 @@ bun publish                 # Publish to npm (see PUBLISH-PROTOCOL.md)
 bun-sticky/
 ├── index.ts              # CLI entry + ASCII banner
 ├── lib/
+│   ├── core/             # Embedded faf-wasm-core
+│   │   ├── index.ts      # init(), score(), getKernel()
+│   │   ├── types.ts      # FafKernel, ScoreResult, TIERS
+│   │   ├── kernels/      # Rust adapter + Zig placeholder
+│   │   └── wasm/         # Embedded 322KB WASM binary
 │   ├── parser.ts         # Zero-dep YAML parser
-│   ├── scorer.ts         # Wolfejam 21-slot scoring
+│   ├── scorer.ts         # Thin WASM wrapper
 │   └── tier.ts           # 7-tier ranking system
 └── tests/
     ├── sticky.test.ts    # Core unit tests
+    ├── wasm.test.ts      # WASM kernel tests
     └── wjttc.test.ts     # Championship test suite
 ```
 
@@ -32,16 +39,9 @@ bun-sticky/
 **Wolfejam Slot-Based Scoring**:
 
 - 21 total slots across 5 categories
-- Type-aware: CLI=9, Fullstack=21, etc.
-- Formula: `Score = (Filled / Applicable) × 100`
-
-| Category | Slots | Fields |
-|----------|-------|--------|
-| Project | 3 | name, goal, main_language |
-| Frontend | 4 | frontend, css_framework, ui_library, state_management |
-| Backend | 5 | backend, api_type, runtime, database, connection |
-| Universal | 3 | hosting, build, cicd |
-| Human | 6 | who, what, why, where, when, how |
+- Data-driven slotignore — the .faf file carries the scoring truth
+- Formula: `Score = Populated / Active × 100` where Active = Total - Ignored
+- Powered by faf-wasm-core v1.0.0 (Rust Mk4 WASM, 322KB, 284μs)
 
 ## Tier System
 
@@ -100,6 +100,6 @@ See `PUBLISH-PROTOCOL.md` for the complete ceremony.
 
 **STATUS: BI-SYNC ACTIVE 🔗 - Synchronized with .faf context!**
 
-*Last Sync: 2026-03-21T00:30:54.593Z*
+*Last Sync: 2026-03-21T01:36:17.376Z*
 *Sync Engine: F1-Inspired Software Engineering*
 *🏎️⚡️_championship_sync*

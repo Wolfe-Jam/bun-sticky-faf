@@ -1,0 +1,60 @@
+{
+  "birthCertificate": {
+    "born": "2026-03-21T00:29:33.658Z",
+    "birthDNA": 71,
+    "birthDNASource": "CLAUDE.md",
+    "projectDNA": "21d831c8f511a665",
+    "authenticated": false,
+    "certificate": "FAF-2026-BUNSTICK-7ZA9"
+  },
+  "versions": [
+    {
+      "version": "v1.0.0",
+      "timestamp": "2026-03-21T00:29:33.658Z",
+      "score": 71,
+      "changes": [
+        "Initial context from CLAUDE.md"
+      ],
+      "approved": false,
+      "growth": 0,
+      "growthRate": 0
+    }
+  ],
+  "current": {
+    "version": "v1.0.0",
+    "score": 71,
+    "approved": false,
+    "lastSync": "2026-03-21T00:29:33.658Z"
+  },
+  "recovery": {
+    "claudeMD": "/Users/wolfejam/FAF/bun-sticky-faf/CLAUDE.md",
+    "lastBackup": "2026-03-21T00:29:33.658Z",
+    "syncStatus": "active",
+    "autoRecover": true
+  },
+  "growth": {
+    "totalGrowth": 0,
+    "daysActive": 0,
+    "averageDailyGrowth": 0,
+    "bestDay": {
+      "date": "2026-03-21T00:29:33.658Z",
+      "growth": 0
+    },
+    "bestWeek": {
+      "start": "2026-03-21T00:29:33.658Z",
+      "growth": 0
+    },
+    "milestones": [
+      {
+        "type": "birth",
+        "score": 71,
+        "date": "2026-03-21T00:29:33.658Z",
+        "version": "v1.0.0",
+        "label": "Birth",
+        "emoji": "🐣"
+      }
+    ]
+  },
+  "lastModified": "2026-03-21T00:29:33.658Z",
+  "format": "faf-dna-v1"
+}
