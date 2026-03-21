@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.0.0 — The WASM Edition (March 20, 2026)
+
+- **faf-wasm-core** embedded — Mk4 Rust WASM kernel (322KB)
+- **Data-driven slotignore** — the .faf file carries the scoring truth
+- **284μs** per score — benchmarked
+- **New commands**: `wasm-score`, `bench`, `badge`
+- **369 tests** across 3 suites, 0 failures
+- **Zero dependencies** — still zero
+- Rewrote scorer.ts as thin WASM wrapper
+- Updated README for v2.0.0
+
 ## 1.1.0 — Bunx Edition (March 13, 2026)
 
 - Fixed VERSION constant (was stuck at 1.0.4)
