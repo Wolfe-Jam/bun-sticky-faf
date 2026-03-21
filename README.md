@@ -42,18 +42,16 @@ bunx bun-sticky score
 - **faf-wasm-core** embedded — Mk4 Rust WASM kernel (322KB)
 - **Data-driven slotignore** — the .faf file carries the scoring truth
 - **284μs** per score — benchmarked
-- **405 tests** across 2 packages, 0 failures
+- **369 tests** across 3 suites, 0 failures
 - **Zero dependencies** — still zero
-
-Read the blog post: [The WASM Edition](https://faf.one/blog/wasm-edition)
 
 ## Try It
 
 No install needed:
 
 ```bash
-bunx bun-sticky score       # Score your project
-bunx bun-sticky wasm-score  # Score via Mk4 WASM kernel
+bunx bun-sticky score       # Score your project (WASM kernel)
+bunx bun-sticky wasm-score  # Score with detailed WASM output
 bunx bun-sticky bench       # Benchmark: 284μs per score
 bunx bun-sticky badge       # Get your mcpaas.live badge
 bunx bun-sticky init myapp  # Create project.faf
@@ -102,7 +100,7 @@ A CLI project marks frontend/backend slots as `slotignored` in the .faf file its
 
 ## Testing
 
-405 tests across 2 packages. Full Bun test API coverage.
+369 tests across 3 suites. Full Bun test API coverage.
 
 ```bash
 bun test
@@ -119,7 +117,7 @@ const kernel = await init("rust");  // or "zig" when Cascade ships
 const result = kernel.score(yaml);  // Same interface. Any engine.
 ```
 
-TS and WASM produce identical scores. Two engines, one truth.
+Same interface, any engine. One kernel, one truth.
 
 ## Want More?
 
@@ -133,16 +131,7 @@ brew install faf-cli && faf auto  # Homebrew
 
 ## FAF Ecosystem
 
-**36,000+ downloads** across npm, PyPI, and crates.io:
-
-| Package | Runtime | What |
-|---------|---------|------|
-| [faf-cli](https://npmjs.com/package/faf-cli) | Node.js + Bun | The CLI |
-| [claude-faf-mcp](https://npmjs.com/package/claude-faf-mcp) | MCP | Anthropic MCP #2759 |
-| [faf-mcp](https://npmjs.com/package/faf-mcp) | MCP | Universal MCP |
-| [grok-faf-mcp](https://npmjs.com/package/grok-faf-mcp) | MCP | xAI Grok MCP |
-| **bun-sticky** | Bun + WASM | This one |
-| [faf-wasm-core](https://github.com/Wolfe-Jam/faf-wasm-core) | WASM | The kernel |
+Part of [FAF](https://faf.one) — 36,000+ downloads across npm, PyPI, and crates.io. See [faf-cli](https://npmjs.com/package/faf-cli) for the full toolchain.
 
 ## License
 
