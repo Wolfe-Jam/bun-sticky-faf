@@ -133,6 +133,8 @@ brew install faf-cli && faf auto  # Homebrew
 
 Part of [FAF](https://faf.one) — 36,000+ downloads across npm, PyPI, and crates.io. See [faf-cli](https://npmjs.com/package/faf-cli) for the full toolchain.
 
+If `bun-sticky` has been useful, consider starring the repo — it helps others find it.
+
 ## License
 
 MIT
