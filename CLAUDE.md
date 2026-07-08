@@ -1,3 +1,36 @@
+<!-- faf:start -->
+<!-- faf: bun-sticky | TypeScript | cli | Fastest bun under the sum. FAF scoring for Bun — powered by Mk4 WASM. -->
+<!-- faf: claim=project.faf | family=FAF -->
+
+# CLAUDE.md — bun-sticky
+
+## What This Is
+
+Fastest bun under the sum. FAF scoring for Bun — powered by Mk4 WASM.
+
+## Stack
+
+- **Language:** TypeScript
+- **Runtime:** Bun
+- **Package Manager:** npm
+- **API:** CLI
+- **Hosting:** npm registry
+- **CI/CD:** GitHub Actions
+
+## Context
+
+- **Who:** wolfejam team
+- **What:** Fastest bun under the sum. FAF scoring for Bun — powered by Mk4 WASM.
+- **Why:** To enable faf, bun, bun-native, bunx, cli, scoring, wolfejam, ai-context, ai-readiness, project-dna, context-engineering, iana, claude, persistent-context, wasm, mk4
+- **Where:** npm registry + GitHub
+- **When:** Production/Stable
+- **How:** bunx bun-sticky score
+
+---
+
+*STATUS: BI-SYNC ACTIVE — 2026-07-08T04:25:55.195Z*
+<!-- faf:end -->
+
 # bun-sticky
 
 Fastest bun under the sum. Bun-native .faf CLI with Wolfejam slot-based scoring.
