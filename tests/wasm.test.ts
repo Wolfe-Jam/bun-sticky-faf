@@ -315,7 +315,7 @@ describe("Parity: TS Scorer vs WASM Kernel", () => {
 
     // Both should agree the tier is high
     expect(wasmResult.score).toBeGreaterThanOrEqual(85);
-    expect(tsTier.emoji).toMatch(/[🏆🥇🥈🥉]/);
+    expect(tsTier.emoji).toMatch(/[🏆★◆◇]/);
   });
 
   test("both score CLI with slotignored at 100%", () => {

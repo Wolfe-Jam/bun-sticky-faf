@@ -3,7 +3,7 @@
 /** Score result from any WASM kernel */
 export interface ScoreResult {
   score: number;           // 0-100 (integer)
-  tier: string;            // Emoji: 🏆 🥇 🥈 🥉 🟢 🟡 🔴
+  tier: string;            // Emoji: 🏆 ★ ◆ ◇ ● ● ○
   populated: number;       // Filled slots
   empty: number;           // Empty slots
   ignored: number;         // Slotignored slots
@@ -37,13 +37,26 @@ export interface FafbSection {
 /** Tier boundaries (universal, baked in) */
 export const TIERS = {
   TROPHY:  { min: 100, emoji: "🏆", name: "Trophy" },
-  GOLD:    { min: 99,  emoji: "🥇", name: "Gold" },
-  SILVER:  { min: 95,  emoji: "🥈", name: "Silver" },
-  BRONZE:  { min: 85,  emoji: "🥉", name: "Bronze" },
-  GREEN:   { min: 70,  emoji: "🟢", name: "Green" },
-  YELLOW:  { min: 55,  emoji: "🟡", name: "Yellow" },
-  RED:     { min: 0,   emoji: "🔴", name: "Red" },
+  GOLD:    { min: 99,  emoji: "★", name: "Gold" },
+  SILVER:  { min: 95,  emoji: "◆", name: "Silver" },
+  BRONZE:  { min: 85,  emoji: "◇", name: "Bronze" },
+  GREEN:   { min: 70,  emoji: "●", name: "Green" },
+  YELLOW:  { min: 55,  emoji: "●", name: "Yellow" },
+  RED:     { min: 0,   emoji: "○", name: "Red" },
 } as const;
+
+/**
+ * Geometric tier emoji for a score (0–100). The kernel's raw `.tier` string is
+ * normalized to this at the wrapper (kernels/rust.ts) so emitted data matches the
+ * displayed ladder — bun-sticky derives the tier from the score, never the raw
+ * kernel string (the faf-cli pattern; the WASM binary still emits legacy glyphs).
+ */
+export function tierEmojiForScore(score: number): string {
+  for (const t of Object.values(TIERS)) {
+    if (score >= t.min) return t.emoji;
+  }
+  return TIERS.RED.emoji;
+}
 
 /** Kernel capability flags */
 export interface KernelCapabilities {

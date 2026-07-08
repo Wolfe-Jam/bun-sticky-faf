@@ -415,27 +415,27 @@ describe("🏁 WJTTC Race 4: Tier System", () => {
     });
 
     test("Gold has gold medal emoji", () => {
-      expect(getTier(99).emoji).toBe("🥇");
+      expect(getTier(99).emoji).toBe("★");
     });
 
     test("Silver has silver medal emoji", () => {
-      expect(getTier(95).emoji).toBe("🥈");
+      expect(getTier(95).emoji).toBe("◆");
     });
 
     test("Bronze has bronze medal emoji", () => {
-      expect(getTier(85).emoji).toBe("🥉");
+      expect(getTier(85).emoji).toBe("◇");
     });
 
     test("Green has green circle emoji", () => {
-      expect(getTier(70).emoji).toBe("🟢");
+      expect(getTier(70).emoji).toBe("●");
     });
 
     test("Yellow has yellow circle emoji", () => {
-      expect(getTier(55).emoji).toBe("🟡");
+      expect(getTier(55).emoji).toBe("●");
     });
 
     test("Red has red circle emoji", () => {
-      expect(getTier(50).emoji).toBe("🔴");
+      expect(getTier(50).emoji).toBe("○");
     });
   });
 

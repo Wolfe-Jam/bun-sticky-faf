@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.1 — Sticky Stars (July 8, 2026)
+
+- **Geometric tier ladder** — the tier glyphs now match the canonical FAF ladder (`★ ◆ ◇ ● ○`, 🏆 for Trophy), retiring the medal emojis (🥇🥈🥉🟢🟡🔴). The kernel's raw tier string is normalized to the ladder at the wrapper (the faf-cli pattern), so display and data always agree.
+- **Dropped the dead Big-Orange score branch** (Big Orange is an honor, never a >100 score tier).
+- **README** refreshed to the Sticky Stars edition.
+
 ## 2.1.0 — Sticky Stars (July 7, 2026)
 
 - **Star nudge** — a single, tasteful star-ask at a top-tier score (95%+), interactive terminals only. Never nags: capped at 3 shows ever, 30-day throttle, silent in CI and when piped. Opt out with `BUN_STICKY_NO_NUDGE` (or the family-wide `FAF_NO_NUDGE`).

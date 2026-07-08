@@ -2,6 +2,7 @@
 // The compiler IS the spec. This adapter doesn't rewrite — it routes.
 
 import type { FafKernel, ScoreResult, FafbInfo, FafbSection } from "../types";
+import { tierEmojiForScore } from "../types";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -25,11 +26,15 @@ export async function loadRustKernel(): Promise<FafKernel> {
     engineVersion,
 
     score(yaml: string): ScoreResult {
-      return JSON.parse(bindings.score_faf(yaml));
+      const r = JSON.parse(bindings.score_faf(yaml)) as ScoreResult;
+      r.tier = tierEmojiForScore(r.score); // normalize kernel's raw glyph → geometric ladder
+      return r;
     },
 
     scoreEnterprise(yaml: string): ScoreResult {
-      return JSON.parse(bindings.score_faf_enterprise(yaml));
+      const r = JSON.parse(bindings.score_faf_enterprise(yaml)) as ScoreResult;
+      r.tier = tierEmojiForScore(r.score);
+      return r;
     },
 
     validate(yaml: string): boolean {
