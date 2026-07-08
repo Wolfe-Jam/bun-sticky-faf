@@ -18,7 +18,7 @@ bunx bun-sticky score
    ████     █▄▀  ▀▄▀ █ █
      ▀▀
 
-🥐 Bun Sticky v2.0.0
+🥐 Bun Sticky v2.1.0
    Fastest bun under the sun.
 
 ────────────────────────────────────────────────
@@ -66,6 +66,8 @@ Or install globally:
 bun install -g bun-sticky
 ```
 
+> **Star nudge:** at a top-tier score (95%+), Bun Sticky shows a one-line star-ask — interactive terminals only, capped at 3 shows and throttled to 30 days, silent in CI. Silence it entirely with `BUN_STICKY_NO_NUDGE=1`.
+
 ## Scoring
 
 21 slots across 5 categories. Data-driven — the `.faf` file carries the truth:
@@ -100,7 +102,7 @@ A CLI project marks frontend/backend slots as `slotignored` in the .faf file its
 
 ## Testing
 
-369 tests across 3 suites. Full Bun test API coverage.
+377 tests across 4 suites. Full Bun test API coverage.
 
 ```bash
 bun test

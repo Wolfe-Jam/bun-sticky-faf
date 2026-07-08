@@ -1,6 +1,6 @@
 {
   "name": "bun-sticky",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Fastest bun under the check sum. FAF scoring for Bun — powered by Mk4 WASM.",
   "main": "index.ts",
   "type": "module",

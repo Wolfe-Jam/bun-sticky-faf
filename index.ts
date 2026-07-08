@@ -15,12 +15,13 @@
 import { parseYaml, getNestedValue } from "./lib/parser.ts";
 import { calculateScore, FafScore } from "./lib/scorer.ts";
 import { getTier } from "./lib/tier.ts";
+import { maybeStarNudge } from "./lib/star-nudge.ts";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONSTANTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const VERSION = "2.0.0";
+const VERSION = "2.1.0";
 
 // Standard colors only (B/W version - color reserved for ZIG poster child)
 const GREEN = "\x1b[32m";
@@ -138,6 +139,9 @@ async function cmdScore(): Promise<void> {
     }
     console.log();
   }
+
+  // Capture the reservoir — a tasteful, throttled star-ask at the winning moment.
+  await maybeStarNudge(result.score);
 }
 
 function getHint(field: string): string {

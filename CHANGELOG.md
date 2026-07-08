@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0 — Sticky Stars (July 7, 2026)
+
+- **Star nudge** — a single, tasteful star-ask at a top-tier score (95%+), interactive terminals only. Never nags: capped at 3 shows ever, 30-day throttle, silent in CI and when piped. Opt out with `BUN_STICKY_NO_NUDGE` (or the family-wide `FAF_NO_NUDGE`).
+- **+8 tests** covering the nudge gate (opt-out · TTY · CI · score threshold · show-cap · throttle)
+- **Zero dependencies** — still zero
+
 ## 2.0.0 — The WASM Edition (March 20, 2026)
 
 - **faf-wasm-core** embedded — Mk4 Rust WASM kernel (322KB)
