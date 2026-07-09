@@ -64,7 +64,7 @@ expect.extend({
     };
   },
   toBeValidTier(received: { emoji: string; name: string; color: string }) {
-    const validEmojis = ["🍊", "🏆", "🥇", "🥈", "🥉", "🟢", "🟡", "🔴", "⚪"];
+    const validEmojis = ["🏆", "★", "◆", "◇", "●", "○", "♡"];
     const pass = validEmojis.includes(received.emoji);
     return {
       pass,
@@ -482,21 +482,21 @@ describe("Tier 2: Scoring Engine", () => {
 describe("Tier 3: Tier System", () => {
   // ★ test.each() - All tier boundaries
   test.each([
-    [110, "🍊", "Big Orange"],
-    [105, "🍊", "Big Orange"],
+    [110, "🏆", "Trophy"],
+    [105, "🏆", "Trophy"],
     [100, "🏆", "Trophy"],
-    [99, "🥇", "Gold"],
-    [98, "🥈", "Silver"],
-    [95, "🥈", "Silver"],
-    [94, "🥉", "Bronze"],
-    [85, "🥉", "Bronze"],
-    [84, "🟢", "Green"],
-    [70, "🟢", "Green"],
-    [69, "🟡", "Yellow"],
-    [55, "🟡", "Yellow"],
-    [54, "🔴", "Red"],
-    [1, "🔴", "Red"],
-    [0, "⚪", "Empty"],
+    [99, "★", "Gold"],
+    [98, "◆", "Silver"],
+    [95, "◆", "Silver"],
+    [94, "◇", "Bronze"],
+    [85, "◇", "Bronze"],
+    [84, "●", "Green"],
+    [70, "●", "Green"],
+    [69, "●", "Yellow"],
+    [55, "●", "Yellow"],
+    [54, "○", "Red"],
+    [1, "○", "Red"],
+    [0, "♡", "Empty"],
   ] as const)("T3.01-%03d%% = %s %s", async (score, emoji, name) => {
     const { getTier } = await import("../lib/tier.ts");
     const tier = getTier(score);

@@ -28,7 +28,7 @@ Fastest bun under the sum. FAF scoring for Bun — powered by Mk4 WASM.
 
 ---
 
-*STATUS: BI-SYNC ACTIVE — 2026-07-08T04:25:55.195Z*
+*STATUS: BI-SYNC ACTIVE — 2026-07-08T18:28:43.034Z*
 <!-- faf:end -->
 
 # bun-sticky
@@ -81,12 +81,12 @@ bun-sticky/
 | Score | Tier | Emoji |
 |-------|------|-------|
 | 100% | Trophy | 🏆 |
-| 99%+ | Gold | 🥇 |
-| 95%+ | Silver | 🥈 |
-| 85%+ | Bronze | 🥉 |
-| 70%+ | Green | 🟢 |
-| 55%+ | Yellow | 🟡 |
-| <55% | Red | 🔴 |
+| 99%+ | Gold | ★ |
+| 95%+ | Silver | ◆ |
+| 85%+ | Bronze | ◇ |
+| 70%+ | Green | ● |
+| 55%+ | Yellow | ● |
+| <55% | Red | ○ |
 
 ## Key Files
 

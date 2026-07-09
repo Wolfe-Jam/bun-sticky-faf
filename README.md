@@ -18,7 +18,7 @@ bunx bun-sticky score
    ████     █▄▀  ▀▄▀ █ █
      ▀▀
 
-🥐 Bun Sticky v2.1.0
+🥐 Bun Sticky v2.1.1
    Fastest bun under the sun.
 
 ────────────────────────────────────────────────
@@ -37,13 +37,12 @@ bunx bun-sticky score
 
 [FAF](https://faf.one) (Foundational AI-context Format) is an [IANA-registered](https://www.iana.org/assignments/media-types/application/vnd.faf+yaml) format — project DNA for AI assistants.
 
-## v2.0.0 — The WASM Edition
+## v2.1 — Sticky Stars
 
-- **faf-wasm-core** embedded — Mk4 Rust WASM kernel (322KB)
-- **Data-driven slotignore** — the .faf file carries the scoring truth
-- **284μs** per score — benchmarked
-- **369 tests** across 3 suites, 0 failures
-- **Zero dependencies** — still zero
+- **Star nudge** — a tasteful, throttled star-ask at a top-tier score (95%+), so a tool people quietly use finally gets the stars it earns. Interactive terminals only; opt out with `BUN_STICKY_NO_NUDGE`.
+- **faf-wasm-core** embedded — Mk4 Rust WASM kernel (322KB), 284μs per score
+- **Data-driven slotignore** — the `.faf` file carries the scoring truth
+- **377 tests** across 4 suites, zero dependencies
 
 ## Try It
 
@@ -85,12 +84,12 @@ A CLI project marks frontend/backend slots as `slotignored` in the .faf file its
 | Score | Tier |
 |-------|------|
 | 100% | 🏆 Trophy |
-| 99%+ | 🥇 Gold |
-| 95%+ | 🥈 Silver |
-| 85%+ | 🥉 Bronze |
-| 70%+ | 🟢 Green |
-| 55%+ | 🟡 Yellow |
-| <55% | 🔴 Red |
+| 99%+ | ★ Gold |
+| 95%+ | ◆ Silver |
+| 85%+ | ◇ Bronze |
+| 70%+ | ● Green |
+| 55%+ | ● Yellow |
+| <55% | ○ Red |
 
 ## Speed
 

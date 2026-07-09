@@ -21,7 +21,7 @@ import { maybeStarNudge } from "./lib/star-nudge.ts";
 // CONSTANTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const VERSION = "2.1.0";
+const VERSION = "2.1.1";
 
 // Standard colors only (B/W version - color reserved for ZIG poster child)
 const GREEN = "\x1b[32m";
@@ -295,7 +295,7 @@ async function cmdSync(): Promise<void> {
   if (await claudeFile.exists()) {
     // Update existing CLAUDE.md - preserve content, update/insert score badge
     let existing = await claudeFile.text();
-    const badgePattern = /^\*\*[🏆🥇🥈🥉🟢🟡🔴⚪🍊]\s*\d+%.*\*\*.*slots filled$/mu;
+    const badgePattern = /^\*\*[🏆★◆◇●○♡]\s*\d+%.*\*\*.*slots filled$/mu;
 
     if (badgePattern.test(existing)) {
       // Replace existing badge
