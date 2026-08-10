@@ -132,7 +132,7 @@ brew install faf-cli && faf auto  # Homebrew
 
 ## FAF Ecosystem
 
-Part of [FAF](https://faf.one) — over 100k downloads; see [faf.one/downloads](https://faf.one/downloads) for latest stats. See [faf-cli](https://npmjs.com/package/faf-cli) for the full toolchain.
+Part of [FAF](https://faf.one) — over 110k+ downloads; see [faf.one/downloads](https://faf.one/downloads) for latest stats. See [faf-cli](https://npmjs.com/package/faf-cli) for the full toolchain.
 
 If `bun-sticky` has been useful, consider starring the repo — it helps others find it.
 
