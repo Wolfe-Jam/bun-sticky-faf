@@ -1,5 +1,7 @@
 # Bun Sticky
 
+[![FAF Trophy 100%](https://img.shields.io/badge/FAF-%F0%9F%8F%86%20100%25-000000?labelColor=FF6B35)](https://faf.one)
+
 Fastest bun under the sun. Zero dependencies. Mk4 WASM kernel. Pure Bun.
 
 ```bash
