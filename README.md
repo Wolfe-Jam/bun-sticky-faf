@@ -4,6 +4,8 @@
 
 Fastest bun under the sun. Zero dependencies. Mk4 WASM kernel. Pure Bun.
 
+⭐ [Star it on GitHub](https://github.com/Wolfe-Jam/bun-sticky-faf): bookmarks it for you, helps other devs find it too.
+
 ```bash
 bunx bun-sticky score
 ```
